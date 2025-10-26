@@ -1,0 +1,375 @@
+﻿/* Estilos para el login */
+.login-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.password-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.login-btn, .logout-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Botones superiores derechos */
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-enabled {
+    background-color: #2196F3;
+    color: white;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Espacio para la tabla */
+.data-table {
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.campo-resaltado {
+    background-color: #9999 !important;
+    
+}
+
+.modal-content.fondo-azul-claro {
+    background-color: #e6f0ff !important;
+}
+
+.modal-header.fondo-azul-cielo {
+    background-color: #87ceeb !important;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translateY(-20px);
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+.ui-autocomplete {
+    z-index: 1060 !important; /*mayor que el z-index del modal (bootstrap por defecto usa 1050)*/
+    position: absolute !important;
+    background-color: white;
+}
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Boto flotante*/
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+    font-size: 18px;
+}
+
+/*Transiciones suaves*/
+body, table, th, td, .modal-content, .navbar, input, select, textarea {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+.theme-toggle:hover {
+    background: #0056b3;
+    transform: rotate(20deg);
+}
+
+/*Modo escuro general*/
+body.dark-mode{
+    background-color: #222;
+    color: #f1f1f1;
+}
+
+/*Ajusta tablas, inputs, modales*/
+body.dark-mode .table,
+body.dark-mode .table th,
+body.dark-mode .table td{
+    background-color: #2a2a2a !important;
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode table.dataTable thead th {
+    background-color: #1e1e1e !important;
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode table.dataTable tfoot th {
+    background-color: #1e1e1e !important;
+    color: #f1f1f1 !important;
+}
+
+/*DataTables (filtros, paginacion, etc)*/
+body.dark-mode table.dataTable.stripe tbody tr:nth-child(odd) {
+    background-color: #333 !important;
+}
+
+body.dark-mode table.dataTable.stripe tbody tr:nth-child(even) {
+    background-color: #2a2a2a !important;
+}
+
+body.dark-mode .dataTables_wrapper  .dataTables_scrollHead th {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_filter input,
+body.dark-mode .dataTables_wrapper .dataTables_length select{
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: #333 !important;
+    color: #fff !important;
+    border: 1px solid #555 !important;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
+ /*Inputs, selects, textarea*/
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+}
+/*modales*/
+body.dark-mode .modal-content{
+    background-color: #2b2b2b;
+    color: #fff;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer{
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    border-color: #444;
+}
+
+body.dark-mode .modal-body{
+    background-color: #2b2b2b;
+    color: #f1f1f1;
+}
+
+/*Navbar en modo escuro*/
+body.dark-mode .navbar {
+    background-color: #1f1f1f !important;
+}
+
+body.dark-mode .navbar .navbar-brand,
+body.dark-mode .navbar .navbar-nav .nav-link,
+body.dark-mode .navbar .navbar-text,
+body.dark-mode .navbar-toggler {
+    color: #f1f1f1 !important;
+}
+
+/*hoer en enlaces de navbar*/
+body.dark-mode .navbar .navbar-nav .nav-link:hover{
+    color: #f39c12 !important;
+}
+#themeIcon{
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+
+#themeIcon.fa-moon{
+    color: #444; /*amarillo calido*/
+    transform: rotate(180deg);
+}
+
+#themeIcon.fa-sun {
+    color: #f39c12; /*naranja*/
+    transform: rotate(0deg);
+}
+
+/*Labels*/
+body.dark-mode label,
+body.dark-mode .form-label,
+body.dark-mode .form-check-label{
+    color: #f1f1f1 !important;
+}
+
+/*placeholder dentro de inputs*/
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder{
+    color: #bbb;
+}
+
+/*texto de ayuda*/
+body.dark-mode .form-texr{
+    color: #aaa !important;
+}
+
+/*contenedor (card o panel)*/
+body.dark-mode .card,
+body.dark-mode .login-box,
+body.dark-mode .login-panel{
+    background-color: #2a2a2a !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #444 !important;
+}
+
+/*botones*/
+body.dark-mode .btn-primary{
+    background-color: #007bff !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .btn-primary:hover{
+    background-color: #0056b3 !important;
+}
+
+/*Boton flotante de notas*/
+.patch-notes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+    font-size: 18px;
+}
+
+.patch-notes:hover{
+    background: #218838;
+    transform: scale(1.1);
+}
+
+/*popup de notas*/
+.patch-popup {
+    position: fixed;
+    bottom: 75px;
+    right: 20px;
+    width: 250px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    z-index: 3000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: none; /*inicialmente oculto*/
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+}
+ /*VISIBLE*/
+.patch-popup.is-open {
+    display: block; /*se muestra al hacer clic en el boton*/
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.patch-popup .patch-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/*Notas colapsadas*/
+.patch-popup ul{
+    list-style: none;
+    padding-left: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+ /*Notas expandidas*/
+.patch-popup.is-expanded ul{
+    max-height: 300px; /*se expande*/
+}
+
+
+/*estilo en modo oscuro*/
+body.dark-mode .patch-popup{
+    background: #2a2a2a;
+    border-color: #555;
+    color: #f1f1f1;
+}
+
+/*Estilos para campos de solo lectura o deshabilitados*/
+.form-control[readonly],
+.form-control:disabled,
+.form-control[disabled] {
+    background-color: #f7f7f7 !important;
+    color: #333333 !important;
+    opacity: 1;
+}

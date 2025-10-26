@@ -1,0 +1,13 @@
+﻿# Visual Studio 2015/2017/2019/2022
+## Ignore Visual Studio temporary files, directories and build results
+[Dd]ebug/
+[Rr]elease/
+*.suo
+*.user
+*.log
+*.pdb
+*.obj
+
+# Folder de cache de Visual Studio (¡ESTO ES LO MÁS IMPORTANTE!)
+# Contiene archivos de caché y configuración local del usuario.
+.vs/
