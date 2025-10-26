@@ -7,15 +7,27 @@ Imports System.IO
 Imports System.IO.Packaging
 
 Namespace Controllers
+    ''' <summary>
+    ''' Controlador encargado de la captura inicial, registro y edicion de scrap
+    ''' contiene las cacciones para crear, guardar, editar y eliminar registros de scrap
+    ''' </summary>
+    ''' <remarks>Este controlado gestiona la vista principal de captura, la validacion y el guardado de los datos en Scrap_detalle y Scrap_header</remarks>
     Public Class AgregarScrapController
         Inherits Controller
 
-        'GET: Scrap/Index
+        ''' <summary>
+        ''' Accion principal que carga la vista de captura de scrap Index para el proceso de registro de scrap
+        ''' </summary>
+        ''' <returns>Retorna la vista Index</returns>
         Function Index() As ActionResult
             Return View()
         End Function
 
-        ' GET: Scrap/Create
+        ''' <summary>
+        ''' Accion GET que carga el formulario de captura de scrap.
+        ''' Carga las listas desplegables necesarias desde la base de datos (Linea, Turno, Numero de Parte, Equipo)
+        ''' </summary>
+        ''' <returns>Retorna una vista parcial con el formulario de creacion precargado con el modelo vacio</returns>
         Function Create() As ActionResult
             Try
                 'Inicia un modelo vacio
@@ -45,14 +57,6 @@ Namespace Controllers
                     End Using
                 End Using
 
-                ''Logica para mostrar el Id_scrap actual
-                'If Session("IdScrapActual") IsNot Nothing Then
-                '    ViewBag.IdScrapActual = Session("IdScrapActual").ToString()
-                'Else
-                '    'Esto SOLO deberia ocurrir si la sesion expiro o hubo error
-                '    ViewBag.IdScrapActual = "Folio Scrap nuevo"
-                'End If
-
                 ViewBag.PartNum = listaPartNum
                 Return PartialView("Create", model)
 
@@ -63,16 +67,17 @@ Namespace Controllers
             End Try
         End Function
 
-        'POST: Scrap/Create
+        ''' <summary>
+        ''' Accion POST que recibe y guarda los datos una nueva captura de scrap.
+        ''' Valida los campos requeridos antes de guardar y posteriormente guarda los datos en la base de datos.
+        ''' </summary>
+        ''' <param name="formulario">El modelo <see cref="FormularioScrap"/> con los datos enviados desde la vista</param>
+        ''' <returns>Retorna un <see cref="JsonResult"/>con el resultado de la operacion(exito o error) y el ID de scrap generado</returns>
         <HttpPost>
         Function Create(formulario As FormularioScrap) As JsonResult
             'If ModelState.IsValid Then
             Dim camposFaltantes As New List(Of String)
 
-            'Validaciones de campos llenados en js
-            'If String.IsNullOrWhiteSpace(formulario.CFT) Then camposFaltantes.Add("CFT")
-            'If String.IsNullOrWhiteSpace(formulario.Ccost) Then camposFaltantes.Add("Ccosto")
-            'If formulario.Unit_cost <= 0 Then camposFaltantes.Add("Costo")
             If String.IsNullOrWhiteSpace(formulario.Line) Then camposFaltantes.Add("Linea")
             If String.IsNullOrWhiteSpace(formulario.Shift) Then camposFaltantes.Add("Turno")
             If String.IsNullOrWhiteSpace(formulario.Part_number) Then camposFaltantes.Add("Numero de Parte")
@@ -104,11 +109,6 @@ Namespace Controllers
                 'Manejo de error en GuardarBD
                 Return Json(New With {.success = False, .message = "Error al intentar guardar: " & ex.Message})
             End Try
-
-            ''Guarda Scrap
-            'GuardarEnBD(formulario)
-
-            'Return Json(New With {.success = True, .message = "¡Registro guardado! Puedes seguir capturando más registros."})
         End Function
 
         'Metodos auxiliares
@@ -324,7 +324,6 @@ Namespace Controllers
             Return Json(lista, JsonRequestBehavior.AllowGet)
         End Function
 
-
         Public Function ObtenerDefectos() As JsonResult
             Dim defectos As New List(Of String)()
             Dim connectionString As String = ConfigurationManager.ConnectionStrings("Smt_TraceContext").ConnectionString
@@ -442,43 +441,6 @@ Namespace Controllers
             Try
                 'se reutiliza la nueva funcion auxiliar para cargar el modelo
                 Dim detalle = ObtenerDetalleOriginal(id)
-
-
-                'Dim detalle As New ScrapDetalleEditar()
-                'Dim connectionString As String = ConfigurationManager.ConnectionStrings("Smt_TraceContext").ConnectionString
-
-                'Using conn As New SqlConnection(connectionString)
-                '    conn.Open()
-                '    Dim query As String = "SELECT * FROM Scrap_detalle WHERE id = @id"
-                '    Using cmd As New SqlCommand(query, conn)
-                '        cmd.Parameters.AddWithValue("@id", id)
-                '        Dim reader = cmd.ExecuteReader()
-                '        If reader.Read() Then
-                '            detalle.Tabla = If(IsDBNull(reader("id")), 0, Convert.ToInt32(reader("id")))
-                '            detalle.Id_scrap = If(IsDBNull(reader("Id_scrap")), 0, Convert.ToInt32(reader("Id_scrap")))
-                '            detalle.Line = If(IsDBNull(reader("Line")), "", reader("Line").ToString())
-                '            detalle.CFT = If(IsDBNull(reader("CFT")), "", reader("CFT").ToString())
-                '            detalle.Shift = If(IsDBNull(reader("Shift")), "", reader("Shift").ToString())
-                '            detalle.Ccost = If(IsDBNull(reader("id")), "", reader("Ccost").ToString())
-                '            detalle.Unit_cost = If(IsDBNull(reader("Unit_cost")), 0D, Convert.ToDecimal(reader("Unit_cost")))
-                '            detalle.Total_cost = If(IsDBNull(reader("Total_cost")), 0D, Convert.ToDecimal(reader("Total_cost")))
-                '            detalle.HU = If(IsDBNull(reader("HU")), "", reader("HU").ToString())
-                '            detalle.Reference = If(IsDBNull(reader("Reference")), "", reader("Reference").ToString())
-                '            detalle.Defecto_Espanol = If(IsDBNull(reader("Defecto_Espanol")), "", reader("Defecto_Espanol").ToString())
-                '            detalle.Equipment = If(IsDBNull(reader("Equipment")), "", reader("Equipment").ToString())
-                '            detalle.Part_number = If(IsDBNull(reader("Part_number")), "", reader("Part_number").ToString())
-                '            detalle.Batch = If(IsDBNull(reader("Batch")), "", reader("Batch").ToString())
-                '            detalle.Qty = If(IsDBNull(reader("Qty")), 0, Convert.ToInt32(reader("Qty")))
-                '            detalle.RFA = If(IsDBNull(reader("RFA")), "", reader("RFA").ToString())
-                '            detalle.Ing_validacion = If(IsDBNull(reader("Ing_validacion")), "", reader("Ing_validacion").ToString())
-                '            detalle.Quien = If(IsDBNull(reader("Quien")), "", reader("Quien").ToString())
-                '            detalle.Cuando = If(IsDBNull(reader("Cuando")), Nothing, Convert.ToDateTime(reader("Cuando")))
-                '            detalle.Contencion = If(IsDBNull(reader("Contencion")), "", reader("Contencion").ToString())
-                '            detalle.CausaRaiz = If(IsDBNull(reader("CausaRaiz")), "", reader("CausaRaiz").ToString())
-                '            detalle.ACorrectiva = If(IsDBNull(reader("ACorrectiva")), "", reader("ACorrectiva").ToString())
-                '        End If
-                '    End Using
-                'End Using
 
                 CargarAutorizadores()
 

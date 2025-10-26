@@ -22,5 +22,276 @@ ScrapSmtWeb
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="T:ScrapSmtWeb.Controllers.AgregarScrapController">
+ <summary>
+ Controlador encargado de la captura inicial, registro y edicion de scrap
+ contiene las cacciones para crear, guardar, editar y eliminar registros de scrap
+ </summary>
+ <remarks>Este controlado gestiona la vista principal de captura, la validacion y el guardado de los datos en Scrap_detalle y Scrap_header</remarks>
+</member>
+<member name="M:ScrapSmtWeb.Controllers.AgregarScrapController.Index">
+ <summary>
+ Accion principal que carga la vista de captura de scrap Index para el proceso de registro de scrap
+ </summary>
+ <returns>Retorna la vista Index</returns>
+</member>
+<member name="M:ScrapSmtWeb.Controllers.AgregarScrapController.Create">
+ <summary>
+ Accion GET que carga el formulario de captura de scrap.
+ Carga las listas desplegables necesarias desde la base de datos (Linea, Turno, Numero de Parte, Equipo)
+ </summary>
+ <returns>Retorna una vista parcial con el formulario de creacion precargado con el modelo vacio</returns>
+</member>
+<member name="M:ScrapSmtWeb.Controllers.AgregarScrapController.Create(ScrapSmtWeb.FormularioScrap)">
+ <summary>
+ Accion POST que recibe y guarda los datos una nueva captura de scrap.
+ Valida los campos requeridos antes de guardar y posteriormente guarda los datos en la base de datos.
+ </summary>
+ <param name="formulario">El modelo <see cref="T:ScrapSmtWeb.FormularioScrap"/> con los datos enviados desde la vista</param>
+ <returns>Retorna un <see cref="T:System.Web.Mvc.JsonResult"/>con el resultado de la operacion(exito o error) y el ID de scrap generado</returns>
+</member>
+<member name="T:ScrapSmtWeb.Autorizadores">
+ <summary>
+ Clase que representa un autorizador con sus propiedades (supervisor o admin) con sus credenciales.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.Autorizadores.Nombre">
+ <summary>Nombre del autorizador.</summary>
+</member>
+<member name="P:ScrapSmtWeb.Autorizadores.PasswordAuto">
+ <summary>contraseña empleado del autorizador.</summary>
+</member>
+<member name="P:ScrapSmtWeb.Autorizadores.Tipo">
+ <summary>Tipo de autorizador: "SUPERVISOR", "ADMIN", "TECNICO", etc</summary>
+</member>
+<member name="P:ScrapSmtWeb.Autorizadores.Numero">
+ <summary>Número de empleado del autorizador.</summary>
+</member>
+<member name="T:ScrapSmtWeb.Empleados">
+ <summary>
+ Clase que representa un empleado con sus propiedades.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.Empleados.Nombre">
+ <summary>Nombre del empleado</summary>
+</member>
+<member name="P:ScrapSmtWeb.Empleados.EMPLEADOID">
+ <summary>Numero de empleado completo con letra</summary>
+</member>
+<member name="T:ScrapSmtWeb.FormularioScrap">
+ <summary>
+ Clase que representa la estructura de datos utilizada para el formulario de scrap
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Id_scrap">
+ <summary>Identificador único del scrap ID generalmente asignado al guardar el registro</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Line">
+ <summary>La linea de produccion donde courrio el scrap </summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.CFT">
+ <summary>El CFT asignado referente a la linea</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Shift">
+ <summary>El turno donde se esta registrando el scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Ccost">
+ <summary>El centro de costos asociado al material desechado</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Part_number">
+ <summary>Numero de [arte del componente o PCB danado</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Unit_cost">
+ <summary>Costo de cada pieza de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Reference">
+ <summary>La referencia del material</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Qty">
+ <summary>Cantidad de piezas por registro de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Defecto_Espanol">
+ <summary>Descripcion del defecto encontrado</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Batch">
+ <summary>Batch del modelo asociado al scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.HU">
+ <summary>Numero de HU o unidad de manejo donde se encontraba el material</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Tipo">
+ <summary>El tipo de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Ing_validacion">
+ <summary>La persona que valida en primera instancia el registro de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Equipment">
+ <summary>Equipo/Maquinaria donde se genero el defecto</summary>
+</member>
+<member name="P:ScrapSmtWeb.FormularioScrap.Categoria">
+ <summary>Categoria a la que pertenece el scrap</summary>
+</member>
+<member name="T:ScrapSmtWeb.ScrapDetalle">
+ <summary>
+ Clase que representa el detalle de un scrap con sus propiedades.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Id_scrap">
+ <summary>Folio del scrap, normalmente son varios registros, comparten el mismo folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Line">
+ <summary>Linea al que pertenece el registro del scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.CFT">
+ <summary>CFT al que pertenece la linea donde se registro el scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Part_number">
+ <summary>Numero de parte del componente</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.RFA">
+ <summary>IRFA asignado por las Data Clerk</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Unit_cost">
+ <summary>Costo unitario por pieza de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Total_cost">
+ <summary>Costo total de todos los registros de scrap de un mismo FOLIO</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Ccost">
+ <summary>Centro de costos asosciado al registro de scrap, se determina al seleccionar la linea</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Contencion">
+ <summary>Contencion realizada por el tecnico</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.ACorrectiva">
+ <summary>Descripcion detallada por el tecnico sobre las acciones correctias realizadas</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.CausaRaiz">
+ <summary>Descipcion detallada por el teccnico sobre la causa real del defecto</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Defecto_Espanol">
+ <summary>Defecto encontrado en la pieza</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalle.Tabla">
+ <summary>ID del registro asignado por la base de datos</summary>
+</member>
+<member name="T:ScrapSmtWeb.ScrapDetalleEditar">
+ <summary>
+ Clase que representa el detalle editable de un scrap con sus propiedades.
+ Nota. la maoria de las propiedades son solo lectura, excepto las indicadas como editables.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Tabla">
+ <summary>Id de la tabla asociada al scrap tabla de sql oculto en el formulario</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Id_scrap">
+ <summary>Folio del scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Line">
+ <summary>Linea a la que corresponde el scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.CFT">
+ <summary>CFT al que la linea corresponde</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Shift">
+ <summary>Turno de la captura del scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Ccost">
+ <summary>Centro de costo asociado al material desechado</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Unit_cost">
+ <summary>Costo individaul por pieza de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Total_cost">
+ <summary>Costo total de todos los registros de scrap de un mismo folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.HU">
+ <summary>HU perteneciente al scrap registrado</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Reference">
+ <summary>Referecia o descripcion breve</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Defecto_Espanol">
+ <summary>Defecto asociado al scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Equipment">
+ <summary>Equipo donde ocurrio el defecto</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Part_number">
+ <summary>Numero de parte perteneciente al componente</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Batch">
+ <summary>Batch del modelo donde se origino el scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Qty">
+ <summary>Cantidad de registros de scrap po folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.RFA">
+ <summary>RFA asignado al folio de scrap, sirve para identificacion</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Ing_validacion">
+ <summary>Primera validacion del registro de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Quien">
+ <summary>Nombre del supervisor qe valida el scrap final (editable solo para supervisor)</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Cuando">
+ <summary>Fecha y hora de la validacion del scrap (editable para supervisor)</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.Contencion">
+ <summary>Descripcion detallada de la contencion aplicada (editable solo para tecnico)</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.CausaRaiz">
+ <summary>Descripcion detallada de el causante de dicho scrap(editable para tecnico)</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapDetalleEditar.ACorrectiva">
+ <summary>Descripcion detallada de las acciones correctivas realizadas(eitable para tecnico)</summary>
+</member>
+<member name="T:ScrapSmtWeb.ScrapRFAView">
+ <summary>
+ Clase que representa una vista simplificada de RFA de scrap con sus propiedades.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapRFAView.Id_scrap">
+ <summary>Folio del scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapRFAView.RFA">
+ <summary>RFA asignado por las Data Clerk para ese Folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.ScrapRFAView.Status">
+ <summary>Status del Folio, Abierto o Cerrado</summary>
+</member>
+<member name="T:ScrapSmtWeb.TablaRFAs">
+ <summary>
+ Clase que representa una tabla de RFAs con sus propiedades.
+ </summary>
+</member>
+<member name="P:ScrapSmtWeb.TablaRFAs.DateInput">
+ <summary>La fecha en la que se le dio RFA a este Folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.TablaRFAs.Id_scrap">
+ <summary>Folio del cumulo de registros de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.TablaRFAs.CFT">
+ <summary>CFT al que pertenecen esos registros de scrap</summary>
+</member>
+<member name="P:ScrapSmtWeb.TablaRFAs.TotalScrap">
+ <summary>Csoto total de los registros de ese Folio</summary>
+</member>
+<member name="P:ScrapSmtWeb.TablaRFAs.RFA">
+ <summary>RFA asignado a ese Folio de scrap, asignado por las Data Clerk</summary>
+</member>
+<member name="T:ScrapSmtWeb.Utilidades">
+ <summary>
+ Módulo de utilidades para la aplicación web.
+ Contiene funciones comunes como el registro de errores.
+ </summary>
+</member>
+<member name="M:ScrapSmtWeb.Utilidades.RegistrarError(System.String)">
+ <summary>
+ Registra un mensaje de error con la marca de tiempo en un archivo de log.
+ </summary>
+ <param name="mensaje">El mensaje de texto que describe el error a registrar</param>
+</member>
 </members>
 </doc>

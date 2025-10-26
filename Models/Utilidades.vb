@@ -1,6 +1,13 @@
 ﻿Imports System.IO
-
+''' <summary>
+''' Módulo de utilidades para la aplicación web.
+''' Contiene funciones comunes como el registro de errores.
+''' </summary>
 Public Module Utilidades
+    ''' <summary>
+    ''' Registra un mensaje de error con la marca de tiempo en un archivo de log.
+    ''' </summary>
+    ''' <param name="mensaje">El mensaje de texto que describe el error a registrar</param>
     Public Sub RegistrarError(mensaje As String)
         Try
             Dim rutaLog As String = HttpContext.Current.Server.MapPath("~/Logs/Errores.log")
